@@ -2,7 +2,7 @@
 :toc:
 :toc-placement!:
 
-In 2024, the Eclipse Vert.x team proposes a subject for Google Summer of Code through the Eclipse Foundation.
+In 2024, the Eclipse Vert.x team proposes a https://gitlab.eclipse.org/eclipsefdn/emo-team/gsoc-at-the-ef/-/issues/2[subject] for Google Summer of Code through the Eclipse Foundation.
 
 In addition to the GSoC proposal document, we ask candidates to implement a Vert.x application.
 This will help us make sure candidates have a basic understanding of asynchronous programming and the Vert.x toolkit.
@@ -11,18 +11,53 @@ toc::[]
 
 == The assessment app
 
-TBD
+This repository contains the skeletons for a "Jokes Of The Day" Vert.x application.
+
+The Maven POM files are set up for you so fork the repository and start coding.
+
+The application involves a few Vert.x modules: Vert.x Web, the Vert.x Web Client, Vert.x HTTP Proxy and Vert.x JUnit 5.
+
+It consists in three components:
+
+. a backend that fetches jokes from the https://icanhazdadjoke.com/api[icanhazdadjoke.com] public API
+. a website serving static files
+. a proxy that relays traffic from the browser to the website and backend applications
 
 == Tasks
 
-TBD
+=== Fetching jokes
+
+In the `backend.BackendVerticle` class, set up a Vert.x Web Router and HTTP server.
+
+When the HTTP server is ready, make sure that requests to `/joke` will return a random joke, loaded from the https://icanhazdadjoke.com/api[icanhazdadjoke.com] public API.
+
+Create a `backend.BackendVerticleTest` unit test that verifies this behavior.
+
+=== User interface
+
+Update the `webroot/index.html` file of the `website` module: create a user interface that allows to fetch and display a new joke over HTTP.
+
+In the `website.WebsiteVerticle` class, set up a Vert.x Web Router to serve the static content.
+
+=== Proxy
+
+In the `proxy.ProxyVerticle` class, set up a Vert.x Web Router and HTTP server.
+
+Then use https://vertx.io/docs/vertx-http-proxy/java/[Vert.x HTTP Proxy] and https://vertx.io/docs/vertx-web-proxy/java/[Vert.x Web Proxy] to relay traffic from the browser to the website and backend applications.
 
 == Submitting code
 
-TBD
+Please share your implementation by providing a pull request to this repository.
+
+*Do not try to play smart by copying other candidates pull requests*.
+
+In order to ease the review:
+
+* rebase your pull request on `main` regularly
+* organize your `git` history to show one commit per task
 
 == Getting help
 
 The http://vertx.io/docs[Vert.x docs] have all the information you need to implement the assessment application.
 
-If you are not sure how to proceed with one or more of the tasks, get in touch with the possible mentors (email links on the https://wiki.eclipse.org/Google_Summer_of_Code_2023_Ideas#Eclipse_Vert.x[Eclipse wiki page for GSoC] or you can https://github.com/tsegismont/vertx-gsoc-2023-qotd/issues/new[file an issue] in this project).
+If you are not sure how to proceed with one or more of the tasks, get in touch with the possible mentors (email links on the https://gitlab.eclipse.org/eclipsefdn/emo-team/gsoc-at-the-ef/-/issues/2[subject], or you can https://github.com/tsegismont/vertx-gsoc-2024-assessment/issues/new[file an issue] in this project).
