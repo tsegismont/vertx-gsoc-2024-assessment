@@ -1,0 +1,28 @@
+= Eclipse Vert.x GSoC 2024 Assessment App
+:toc:
+:toc-placement!:
+
+In 2024, the Eclipse Vert.x team proposes a subject for Google Summer of Code through the Eclipse Foundation.
+
+In addition to the GSoC proposal document, we ask candidates to implement a Vert.x application.
+This will help us make sure candidates have a basic understanding of asynchronous programming and the Vert.x toolkit.
+
+toc::[]
+
+== The assessment app
+
+TBD
+
+== Tasks
+
+TBD
+
+== Submitting code
+
+TBD
+
+== Getting help
+
+The http://vertx.io/docs[Vert.x docs] have all the information you need to implement the assessment application.
+
+If you are not sure how to proceed with one or more of the tasks, get in touch with the possible mentors (email links on the https://wiki.eclipse.org/Google_Summer_of_Code_2023_Ideas#Eclipse_Vert.x[Eclipse wiki page for GSoC] or you can https://github.com/tsegismont/vertx-gsoc-2023-qotd/issues/new[file an issue] in this project).
