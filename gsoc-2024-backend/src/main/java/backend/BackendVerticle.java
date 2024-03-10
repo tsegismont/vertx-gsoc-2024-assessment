@@ -9,6 +9,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.Route;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.client.WebClient;
+import io.vertx.ext.web.handler.CorsHandler;
 
 public class BackendVerticle extends AbstractVerticle {
 
@@ -34,8 +35,17 @@ public class BackendVerticle extends AbstractVerticle {
   public void start(Promise<Void> startPromise) {
     Router router = Router.router(vertx);
 
-    Route route = router.route(HttpMethod.GET, "/joke");
-    route.handler(ctx -> {
+    router.route().handler(CorsHandler.create()
+      .allowedMethod(io.vertx.core.http.HttpMethod.GET)
+      .allowedMethod(io.vertx.core.http.HttpMethod.POST)
+      .allowedMethod(io.vertx.core.http.HttpMethod.OPTIONS)
+      .allowedHeader("Access-Control-Request-Method")
+      .allowedHeader("Access-Control-Allow-Credentials")
+      .allowedHeader("Access-Control-Allow-Origin")
+      .allowedHeader("Access-Control-Allow-Headers")
+      .allowedHeader("Content-Type"));
+
+    router.route(HttpMethod.GET, "/joke").handler(ctx -> {
       getJoke().onSuccess(resp -> {
         ctx.response()
           .putHeader("content-type", "application/json")
