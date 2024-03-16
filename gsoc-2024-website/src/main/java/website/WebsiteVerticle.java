@@ -3,6 +3,8 @@ package website;
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Promise;
 import io.vertx.core.Vertx;
+import io.vertx.ext.web.Router;
+import io.vertx.ext.web.handler.StaticHandler;
 
 public class WebsiteVerticle extends AbstractVerticle {
 
@@ -15,6 +17,13 @@ public class WebsiteVerticle extends AbstractVerticle {
 
   @Override
   public void start(Promise<Void> startPromise) {
-    startPromise.complete();
+    var server = vertx.createHttpServer();
+    var router = Router.router(vertx);
+    router.route().handler(StaticHandler.create());
+    server
+      .requestHandler(router)
+      .listen(8081)
+      .onSuccess(result -> startPromise.complete())
+      .onFailure(startPromise::fail);
   }
 }

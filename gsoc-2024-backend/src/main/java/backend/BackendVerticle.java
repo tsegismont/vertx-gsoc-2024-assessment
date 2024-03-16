@@ -10,6 +10,7 @@ import io.vertx.ext.web.Router;
 import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.client.WebClient;
 import io.vertx.ext.web.codec.BodyCodec;
+import io.vertx.ext.web.handler.CorsHandler;
 import io.vertx.uritemplate.UriTemplate;
 
 public class BackendVerticle extends AbstractVerticle {
@@ -28,6 +29,7 @@ public class BackendVerticle extends AbstractVerticle {
     webClient = WebClient.create(vertx);
 
     var router = Router.router(vertx);
+    router.route().handler(CorsHandler.create());
     router.route(HttpMethod.GET, "/joke").handler(this::joke);
 
     var server = vertx.createHttpServer();
