@@ -22,7 +22,7 @@
 
   <script>
     document.getElementById("generateJoke").addEventListener("click", function() {
-      fetch("http://localhost:8080/joke")
+      fetch("/joke")
         .then(response => response.json())
         .then(data => {
           const jokeList = document.getElementById("jokes");

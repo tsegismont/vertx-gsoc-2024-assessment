@@ -29,7 +29,6 @@ public class BackendVerticle extends AbstractVerticle {
     webClient = WebClient.create(vertx);
 
     var router = Router.router(vertx);
-    router.route().handler(CorsHandler.create());
     router.route(HttpMethod.GET, "/joke").handler(this::joke);
 
     var server = vertx.createHttpServer();
