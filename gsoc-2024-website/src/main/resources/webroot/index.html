@@ -23,7 +23,7 @@
 </body>
 <script>
   async function getJoke() {
-    const resp = await axios.get('http://localhost:8080/joke')
+    const resp = await axios.get('/joke')
     return resp.data.joke
   }
 
