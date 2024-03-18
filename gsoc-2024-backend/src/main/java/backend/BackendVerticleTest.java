@@ -27,11 +27,11 @@ public class BackendVerticleTest {
   void testApi(Vertx vertx, VertxTestContext testContext) {
     WebClient client = WebClient.create(vertx);
     client.get(8080, "localhost", "/joke").send()
-      .andThen(resp -> {
-        if (resp.failed()) return;
-        JsonObject obj = resp.result().bodyAsJsonObject();
+      .onComplete(testContext.succeeding(resp -> {
+        JsonObject obj = resp.bodyAsJsonObject();
         assertEquals(200, obj.getInteger("status"));
-      }).onComplete(testContext.succeedingThenComplete());
+        testContext.completeNow();
+      }));
   }
 
 }

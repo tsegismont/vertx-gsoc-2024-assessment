@@ -34,5 +34,6 @@ public class ProxyVerticle extends AbstractVerticle {
     proxyRouter.route("/joke").handler(ProxyHandler.create(beProxy));
 
     proxyServer.requestHandler(proxyRouter).listen(5000);
+    startPromise.complete();
   }
 }
