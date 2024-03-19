@@ -30,6 +30,16 @@
       <groupId>io.vertx</groupId>
       <artifactId>vertx-web</artifactId>
     </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-http-proxy</artifactId>
+      <version>4.5.5</version>
+    </dependency>
+    <dependency>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-web-proxy</artifactId>
+      <version>4.5.5</version>
+    </dependency>
   </dependencies>
 
 </project>
