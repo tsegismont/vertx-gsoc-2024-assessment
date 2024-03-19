@@ -61,3 +61,20 @@ In order to ease the review:
 The http://vertx.io/docs[Vert.x docs] have all the information you need to implement the assessment application.
 
 If you are not sure how to proceed with one or more of the tasks, get in touch with the possible mentors (email links on the https://gitlab.eclipse.org/eclipsefdn/emo-team/gsoc-at-the-ef/-/issues/2[subject], or you can https://github.com/tsegismont/vertx-gsoc-2024-assessment/issues/new[file an issue] in this project).
+
+== Deploy
+
+Run the following commands in this project directory:
+
+[source,bash]
+----
+# install dependencies and package jars:
+mvn install
+
+# run the generated jar files with the following (you might want to run them with `&`):
+java -jar .\gsoc-2024-backend\target\gsoc-2024-backend-1.0-fat.jar
+java -jar .\gsoc-2024-website\target\gsoc-2024-website-1.0-fat.jar
+java -jar .\gsoc-2024-proxy\target\gsoc-2024-proxy-1.0-fat.jar
+----
+
+Then the website is available at http://localhost:5000/ in the browser.

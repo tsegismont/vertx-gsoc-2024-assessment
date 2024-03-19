@@ -1,10 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8"/>
   <title>GSoC 2024 - Eclipse Vert.x</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
 </head>
 <body>
-
+<div class="h-screen w-screen flex justify-center text-gray-900 bg-gray-50">
+  <div class="max-w-xl w-full p-6">
+    <div class="rounded-md shadow-md bg-white p-6 flex flex-col space-y-4">
+      <p class="font-bold text-xl">Random dad joke:</p>
+      <p id="displayTxt" class=" border p-2 rounded-sm"></p>
+      <div>
+        <button onclick="renderNewJoke()" id="nextBtn"
+                class=" shadow-md px-2 py-1 rounded-sm hover:bg-blue-600 bg-blue-500 text-white">Next
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
 </body>
+<script>
+  async function getJoke() {
+    const resp = await axios.get('/joke')
+    return resp.data.joke
+  }
+
+  function renderNewJoke() {
+    getJoke().then(joke => {
+      document.getElementById('displayTxt').innerText = joke
+    })
+  }
+
+  renderNewJoke()
+</script>
 </html>
