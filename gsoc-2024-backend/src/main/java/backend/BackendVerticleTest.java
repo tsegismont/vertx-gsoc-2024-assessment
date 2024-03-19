@@ -12,8 +12,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(VertxExtension.class)
 public class BackendVerticleTest {
@@ -28,17 +27,7 @@ public class BackendVerticleTest {
 
     // Deploy the BackendVerticle
     vertx.deployVerticle(new BackendVerticle(), testContext.succeeding(id -> testContext.completeNow()));
-
-    // Create an HTTP server and client for testing
-    server = vertx.createHttpServer();
     client = vertx.createHttpClient();
-    server.requestHandler(req -> {
-      if (req.method() == HttpMethod.GET && req.path().equals("/joke")) {
-        req.response().end("Test joke");
-      } else {
-        req.response().setStatusCode(404).end();
-      }
-    }).listen(8080, testContext.succeeding(result -> testContext.completeNow()));
   }
 
   @AfterAll
@@ -54,7 +43,7 @@ public class BackendVerticleTest {
         testContext.verify(() -> {
           assertEquals(200, response.statusCode());
           response.bodyHandler(body -> {
-            assertTrue(body.toString().length()>0);
+              assertFalse(body.toString().isEmpty());
             testContext.completeNow();
           });
         });
