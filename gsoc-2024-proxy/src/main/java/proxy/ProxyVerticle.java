@@ -28,12 +28,13 @@ public class ProxyVerticle extends AbstractVerticle {
     HttpProxy beProxy = HttpProxy.reverseProxy(proxyClient);
     beProxy.origin(8080, "localhost");
     HttpProxy feProxy = HttpProxy.reverseProxy(proxyClient);
-    feProxy.origin(80, "localhost");
+    feProxy.origin(8081, "localhost");
 
     proxyRouter.route("/").handler(ProxyHandler.create(feProxy));
     proxyRouter.route("/joke").handler(ProxyHandler.create(beProxy));
 
-    proxyServer.requestHandler(proxyRouter).listen(5000);
-    startPromise.complete();
+    proxyServer.requestHandler(proxyRouter).listen(5000)
+      .onSuccess(x -> startPromise.complete())
+      .onFailure(startPromise::fail);
   }
 }

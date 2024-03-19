@@ -22,7 +22,8 @@ public class WebsiteVerticle extends AbstractVerticle {
     staticHandler.setIndexPage("index.html");
     router.route("/").handler(staticHandler);
 
-    vertx.createHttpServer().requestHandler(router).listen(80);
-    startPromise.complete();
+    vertx.createHttpServer().requestHandler(router).listen(8081)
+      .onSuccess(x -> startPromise.complete())
+      .onFailure(startPromise::fail);
   }
 }

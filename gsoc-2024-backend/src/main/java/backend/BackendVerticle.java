@@ -32,7 +32,8 @@ public class BackendVerticle extends AbstractVerticle {
         }).onFailure(ctx::fail);
     });
 
-    vertx.createHttpServer().requestHandler(router).listen(8080);
-    startPromise.complete();
+    vertx.createHttpServer().requestHandler(router).listen(8080)
+      .onSuccess(x -> startPromise.complete())
+      .onFailure(startPromise::fail);
   }
 }
