@@ -3,8 +3,63 @@
 <head>
   <meta charset="UTF-8">
   <title>GSoC 2024 - Eclipse Vert.x</title>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      background-color: #007bff;
+      color: #fff;
+      border: none;
+      padding: 10px 20px;
+      font-size: 16px;
+      cursor: pointer;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #0056b3;
+    }
+
+    #joke {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
 </head>
 <body>
-
+<div class="container">
+  <h1>GSoC 2024 - Eclipse Vert.x</h1>
+  <button onclick="getJoke()">Click for a Joke</button>
+  <div id="joke"></div>
+</div>
 </body>
+
+<script>
+  function getJoke() {
+    axios.get('http://localhost:7070/joke')
+      .then(response => {
+        document.getElementById("joke").innerHTML = response.data;
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  }
+</script>
 </html>
