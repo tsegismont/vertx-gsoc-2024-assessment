@@ -22,19 +22,17 @@ public class BackendVerticle extends AbstractVerticle {
   }
 
   public Future<String> getJoke() {
-    Promise<String> promise = Promise.promise();
-    client.getAbs("http://icanhazdadjoke.com/")
+    return client.getAbs("http://icanhazdadjoke.com/")
       .putHeader("Accept", "application/json")
       .as(BodyCodec.jsonObject())
       .send()
-      .onSuccess(response -> {
-        promise.complete(response.body().getString("joke"));
-      })
-      .onFailure(err -> {
-        System.out.println("Something went wrong " + err.getMessage());
-        promise.fail(err);
+      .compose(jsonObjectHttpResponse -> {
+        if(jsonObjectHttpResponse.statusCode() == 200){
+          return Future.succeededFuture(jsonObjectHttpResponse.body().getString("joke"));
+        } else {
+          return Future.failedFuture(jsonObjectHttpResponse.statusMessage());
+        }
       });
-    return promise.future();
   }
 
   @Override
