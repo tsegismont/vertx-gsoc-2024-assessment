@@ -3,8 +3,37 @@
 <head>
   <meta charset="UTF-8">
   <title>GSoC 2024 - Eclipse Vert.x</title>
+
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/milligram/1.4.1/milligram.css">
+  <style>
+    #jokes {
+      margin-top: 20px;
+    }
+  </style>
 </head>
 <body>
+  <div class="container">
+    <h1>Joke Generator</h1>
+    <button id="generateJoke" class="button-primary">Generate Joke</button>
+    <ul id="jokes"></ul>
+  </div>
 
+  <script>
+    document.getElementById("generateJoke").addEventListener("click", function() {
+      fetch("/joke")
+        .then(response => response.json())
+        .then(data => {
+          const jokeList = document.getElementById("jokes");
+          const jokeItem = document.createElement("li");
+          jokeItem.textContent = data["joke"];
+          jokeList.prepend(jokeItem);
+        })
+        .catch(error => {
+          console.error("Error fetching joke:", error);
+        });
+    });
+  </script>
 </body>
 </html>
