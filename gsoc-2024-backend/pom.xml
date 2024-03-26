@@ -45,9 +45,9 @@
       <version>4.5.6</version>
     </dependency>
     <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.13.1</version>
+      <groupId>io.vertx</groupId>
+      <artifactId>vertx-junit5</artifactId>
+      <version>4.5.6</version>
     </dependency>
   </dependencies>
 
