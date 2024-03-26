@@ -12,6 +12,7 @@ import io.vertx.ext.web.client.WebClient;
 public class BackendVerticle extends AbstractVerticle {
 
   private static final String API_URL = "https://icanhazdadjoke.com/";
+  private WebClient webClient; // Declare WebClient as a class variable
 
   public static void main(String[] args) {
     Vertx.vertx().deployVerticle(new BackendVerticle(), result -> {
@@ -26,6 +27,9 @@ public class BackendVerticle extends AbstractVerticle {
   @Override
   public void start(Promise<Void> startPromise) {
     Router router = Router.router(vertx);
+
+    webClient = WebClient.create(vertx); // Creating a single instance of WebClient
+
     router.get("/joke").handler(this::fetchJoke);
 
     // Creating an HTTP server
@@ -43,7 +47,6 @@ public class BackendVerticle extends AbstractVerticle {
   }
 
   private void fetchJoke(RoutingContext routingContext) {
-    WebClient webClient = WebClient.create(vertx);
 
     // Sending a GET request to the external API to fetch a joke
     webClient.getAbs(API_URL)
